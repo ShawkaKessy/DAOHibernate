@@ -23,7 +23,6 @@ public class Person {
     @Column(name = "city_of_living")
     private String cityOfLiving;
 
-    // Геттеры и сеттеры
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
 

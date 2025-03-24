@@ -16,7 +16,6 @@ public class PersonId implements Serializable {
         this.age = age;
     }
 
-    // Переопределяем equals и hashCode
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

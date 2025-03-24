@@ -1,22 +1,17 @@
 package ru.netology.repository;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.TypedQuery;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import ru.netology.entity.Person;
+import ru.netology.entity.PersonId;
 
 import java.util.List;
+import java.util.Optional;
 
-@Repository
-public class PersonRepository {
-    @PersistenceContext
-    private EntityManager entityManager;
+public interface PersonRepository extends JpaRepository<Person, PersonId> {
 
-    public List<Person> getPersonsByCity(String city) {
-        String hql = "SELECT p FROM Person p WHERE p.cityOfLiving = :city";
-        TypedQuery<Person> query = entityManager.createQuery(hql, Person.class);
-        query.setParameter("city", city);
-        return query.getResultList();
-    }
+    List<Person> findByCityOfLiving(String city);
+
+    List<Person> findByAgeLessThanOrderByAgeAsc(int age);
+
+    Optional<Person> findByNameAndSurname(String name, String surname);
 }
