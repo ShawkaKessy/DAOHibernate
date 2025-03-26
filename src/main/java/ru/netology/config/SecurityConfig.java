@@ -16,11 +16,11 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/persons/by-city").permitAll()  // Открытый эндпоинт
-                        .anyRequest().authenticated()  // Остальные требуют авторизации
+                        .requestMatchers("/persons/by-city").permitAll()
+                        .anyRequest().authenticated()
                 )
-                .formLogin(form -> form.defaultSuccessUrl("/persons/by-city", true))  // Форма логина Spring
-                .logout(logout -> logout.logoutSuccessUrl("/")); // Выход из системы
+                .formLogin(form -> form.defaultSuccessUrl("/persons/by-city", true))
+                .logout(logout -> logout.logoutSuccessUrl("/"));
 
         return http.build();
     }
@@ -28,9 +28,9 @@ public class SecurityConfig {
     @Bean
     public UserDetailsService userDetailsService() {
         UserDetails user = User.withDefaultPasswordEncoder()
-                .username("user")  // Имя пользователя
-                .password("password")  // Пароль
-                .roles("USER")  // Роль
+                .username("user")
+                .password("password")
+                .roles("USER")
                 .build();
 
         return new InMemoryUserDetailsManager(user);
